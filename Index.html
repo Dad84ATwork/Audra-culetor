@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hours Work Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      div {
+        margin: 10px 0;
+      }
+
+      label {
+        display: inline-block;
+        width: 100px;
+        text-align: right;
+      }
+
+      input[type="time"] {
+        width: 100px;
+      }
+
+      input[type="text"] {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hours Work Calculator</h1>
+    <div>
+      <label for="start-time">Start Time:</label>
+      <input type="time" id="start-time">
+    </div>
+    <div>
+      <label for="end-time">End Time:</label>
+      <input type="time" id="end-time">
+    </div>
+    <div>
+      <button onclick="calculate()">Calculate</button>
+    </div>
+    <div>
+      <label for="total-hours">Total Hours:</label>
+      <input type="text" id="total-hours" readonly>
+    </div>
+    <script>
+      function calculate() {
+        const startTime = document.getElementById('start-time').value;
+        const endTime = document.getElementById('end-time').value;
+
+        const startHours = parseFloat(startTime.split(':')[0]);
+        const startMinutes = parseFloat(startTime.split(':')[1]);
+        const endHours = parseFloat(endTime.split(':')[0]);
+        const endMinutes = parseFloat(endTime.split(':')[1]);
+
+        const startDecimal = startHours + (startMinutes / 60);
+        const endDecimal = endHours + (endMinutes / 60);
+
+        let totalHours = endDecimal - startDecimal;
+
+        if (totalHours < 0) {
+          totalHours += 24;
+        }
+
+        totalHours = totalHours.toFixed(2);
+
+        document.getElementById('total-hours').value = totalHours;
+      }
+    </script>
+  </body>
+</html>
